@@ -1,0 +1,33 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const talks = await getCollection("talks");
+// Sort by date descending
+talks.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Talks" description="Talks and presentations.">
+    <div class="section-title with-line">Talks</div>
+    <div class="main-text">
+        <ul class="talks-list">
+            {
+                talks.map((talk) => (
+                    <li>
+                        <a href={`/talks/${talk.id}`} class="talk-card">
+                            <div class="talk-card-title">{talk.data.title}</div>
+                            <div class="talk-card-date">
+                                {talk.data.date.toLocaleDateString(undefined, {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                })}
+                            </div>
+                            <p class="talk-card-desc">{talk.data.desc}</p>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</Layout>

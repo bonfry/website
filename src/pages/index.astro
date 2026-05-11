@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEntry, render } from 'astro:content';
+
+const aboutEntry = await getEntry('about', 'me');
+const { Content } = await render(aboutEntry!);
+---
+
+<Layout title="Home" ogType="profile">
+    <div class="section-title with-line">{aboutEntry!.data.title}</div>
+    <div class="main-text">
+        <Content />
+    </div>
+</Layout>

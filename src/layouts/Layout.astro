@@ -1,0 +1,160 @@
+---
+import "../styles/global.css";
+import { getEntry } from "astro:content";
+
+interface Props {
+    title: string;
+    description?: string;
+    ogImage?: string;
+    ogType?: "website" | "article" | "profile";
+}
+
+const {
+    title,
+    description,
+    ogImage = "/cv_print/image.png",
+    ogType = "website",
+} = Astro.props;
+
+// Fetch profile data
+const profileEntry = await getEntry("profile", "details");
+const profile = profileEntry!.data;
+
+const siteUrl = Astro.site ?? new URL("https://simonebonfrate.dev");
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = new URL(ogImage, siteUrl).href;
+
+const fullName = `${profile.nameFirst} ${profile.nameLast}`;
+const pageTitle = title === "Home" ? `${fullName} — ${profile.title}` : `${title} — ${fullName}`;
+const metaDescription = description ?? profile.summary;
+
+// Astro.url.pathname has a trailing slash in some environments, so we handle it gracefully.
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+// JSON-LD structured data — Person schema
+const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: fullName,
+    jobTitle: profile.title,
+    email: profile.email,
+    url: siteUrl.href,
+    sameAs: ["https://www.linkedin.com/in/simone-bonfrate/"],
+    address: {
+        "@type": "PostalAddress",
+        addressLocality: profile.location,
+    },
+};
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- Primary Meta Tags -->
+        <title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
+        <meta name="description" content={metaDescription} />
+        <meta name="author" content={fullName} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content={ogType} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:site_name" content={`${fullName} — Portfolio`} />
+        <meta property="og:locale" content="en_US" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={ogImageUrl} />
+
+        <!-- Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+            rel="stylesheet"
+        />
+
+        <!-- JSON-LD Structured Data -->
+        <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    </head>
+    <body>
+        <header>
+            <nav class="site-nav" aria-label="Main navigation">
+                <a
+                    href="/"
+                    class={`nav-link ${currentPath === "/" ? "active" : ""}`}
+                    >Home</a
+                >
+                <a
+                    href="/cv"
+                    class={`nav-link ${currentPath === "/cv" ? "active" : ""}`}
+                    >CV</a
+                >
+                <a
+                    href="/talks"
+                    class={`nav-link ${currentPath.startsWith("/talks") ? "active" : ""}`}
+                    >Talks</a
+                >
+            </nav>
+        </header>
+
+        <aside aria-label="Profile sidebar">
+            <div class="photo-container">
+                <img
+                    src="/cv_print/image.png"
+                    alt={`${fullName} profile photo`}
+                    class="profile-image"
+                    width="180"
+                    height="180"
+                    loading="eager"
+                />
+            </div>
+            <div class="name-first">{profile.nameFirst}</div>
+            <div class="name-last">{profile.nameLast}</div>
+            <div class="title">{profile.title}</div>
+
+            <div class="summary-text-side">
+                {profile.summary}
+            </div>
+
+            <div class="social-links">
+                <a
+                    href="https://www.linkedin.com/in/simone-bonfrate/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-item"
+                    aria-label="LinkedIn profile"
+                >
+                    <span class="social-icon material-symbols-outlined" aria-hidden="true"
+                        >link</span
+                    >
+                    LinkedIn
+                </a>
+                <a href={`mailto:${profile.email}`} class="social-item" aria-label={`Send email to ${profile.email}`}>
+                    <span class="social-icon material-symbols-outlined" aria-hidden="true"
+                        >mail</span
+                    >
+                    {profile.email}
+                </a>
+                <div class="social-item">
+                    <span class="social-icon material-symbols-outlined" aria-hidden="true"
+                        >location_on</span
+                    >
+                    {profile.location}
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <slot />
+        </main>
+    </body>
+</html>

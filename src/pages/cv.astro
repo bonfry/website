@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection, getEntry, render } from "astro:content";
+
+const experiences = await getCollection("experience");
+experiences.sort((a, b) => a.data.order - b.data.order);
+
+const education = await getCollection("education");
+education.sort((a, b) => a.data.order - b.data.order);
+
+const skillsEntry = await getEntry("skills", "skills");
+const skills = skillsEntry!.data;
+---
+
+<Layout
+    title="CV"
+    description="Curriculum Vitae of Simone Bonfrate — AI & Computer Vision Engineer. Work experience, education, and technical skills."
+>
+    <a href="/cv_print/index.html" class="btn-primary" target="_blank">
+        <span class="material-symbols-outlined" style="margin-right: 8px;"
+            >print</span
+        >
+        Print CV
+    </a>
+
+    <div class="section-title with-line">WORK EXPERIENCE</div>
+
+    <div class="section-content">
+        {
+            experiences.map(async (exp) => {
+                const { Content } = await render(exp);
+                return (
+                    <div class="job">
+                        <div class="job-title">{exp.data.title}</div>
+                        <div class="job-meta">
+                            {exp.data.company} |{" "}
+                            <span class="date">{exp.data.date}</span>
+                        </div>
+                        <div class="job-desc">
+                            <Content />
+                        </div>
+                    </div>
+                );
+            })
+        }
+    </div>
+
+    <div class="section-title with-line">EDUCATION</div>
+
+    <div class="section-content">
+        {
+            education.map((edu) => (
+                <div class="job">
+                    <div class="job-title">{edu.data.title}</div>
+                    <div class="job-meta">
+                        {edu.data.institution} |{" "}
+                        <span class="date">{edu.data.date}</span>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+
+    <div class="section-title with-line">SKILLS</div>
+
+    <div class="skills-grid">
+        <div class="skills-group">
+            <h4>Technical</h4>
+            <ul class="skills-list">
+                {skills.technical.map((skill: string) => <li>{skill}</li>)}
+            </ul>
+        </div>
+
+        <div class="skills-group">
+            <h4>Professional</h4>
+            <ul class="skills-list">
+                {skills.professional.map((skill: string) => <li>{skill}</li>)}
+            </ul>
+        </div>
+
+        <div class="skills-group">
+            <h4>Languages</h4>
+            <ul class="skills-list">
+                {skills.languages.map((skill: string) => <li>{skill}</li>)}
+            </ul>
+        </div>
+    </div>
+</Layout>
