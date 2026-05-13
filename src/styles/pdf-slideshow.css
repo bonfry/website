@@ -14,7 +14,6 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-    background: #1a1a1a;
     min-height: 200px;
     display: flex;
     align-items: center;
@@ -51,7 +50,9 @@
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Controls */
@@ -121,11 +122,13 @@
     .pdf-controls {
         gap: 0.8rem;
     }
+
     .pdf-btn {
         padding: 8px 12px;
         font-size: 12px;
     }
 }
+
 /* Fullscreen */
 .pdf-slideshow.fullscreen {
     background: #1a1a1a;
@@ -170,7 +173,7 @@
         background: transparent;
     }
 
-    .pdf-slideshow.fullscreen .pdf-controls > * {
+    .pdf-slideshow.fullscreen .pdf-controls>* {
         position: absolute;
         pointer-events: auto;
     }
@@ -191,20 +194,24 @@
         color: #fff;
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 12px;
-        font-size: 0; /* Hides the text label */
+        font-size: 0;
+        /* Hides the text label */
     }
 
     .pdf-slideshow.fullscreen #btn-prev {
         left: 30px;
     }
+
     .pdf-slideshow.fullscreen #btn-prev .material-symbols-outlined {
-        margin-left: 8px; /* Optically center the arrow */
+        margin-left: 8px;
+        /* Optically center the arrow */
         font-size: 28px;
     }
 
     .pdf-slideshow.fullscreen #btn-next {
         right: 30px;
     }
+
     .pdf-slideshow.fullscreen #btn-next .material-symbols-outlined {
         font-size: 28px;
     }
@@ -226,6 +233,7 @@
         border-radius: 8px;
         margin: 0 !important;
     }
+
     .pdf-slideshow.fullscreen .fullscreen-btn .material-symbols-outlined {
         font-size: 24px;
     }
