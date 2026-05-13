@@ -14,7 +14,8 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-    min-height: 200px;
+    background: transparent;
+    min-height: 148px;
     display: flex;
     align-items: center;
     justify-content: center;
