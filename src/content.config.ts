@@ -31,6 +31,16 @@ const experienceCollection = defineCollection({
   }),
 });
 
+const volontaryCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/volontary" }),
+  schema: z.object({
+    title: z.string(),
+    company: z.string(),
+    date: z.string(),
+    order: z.number(),
+  }),
+});
+
 const educationCollection = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/education" }),
   schema: z.object({
@@ -67,4 +77,5 @@ export const collections = {
   education: educationCollection,
   skills: skillsCollection,
   talks: talksCollection,
+  volontary: volontaryCollection
 };

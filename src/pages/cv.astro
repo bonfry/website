@@ -8,6 +8,9 @@ experiences.sort((a, b) => a.data.order - b.data.order);
 const education = await getCollection("education");
 education.sort((a, b) => a.data.order - b.data.order);
 
+const volontary = await getCollection("volontary");
+education.sort((a, b) => a.data.order - b.data.order);
+
 const skillsEntry = await getEntry("skills", "skills");
 const skills = skillsEntry!.data;
 ---
@@ -54,6 +57,22 @@ const skills = skillsEntry!.data;
                     <div class="job-title">{edu.data.title}</div>
                     <div class="job-meta">
                         {edu.data.institution} |{" "}
+                        <span class="date">{edu.data.date}</span>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+
+    <div class="section-title with-line">OTHER</div>
+
+    <div class="section-content">
+        {
+            volontary.map((edu) => (
+                <div class="job">
+                    <div class="job-title">{edu.data.title}</div>
+                    <div class="job-meta">
+                        {edu.data.company} |{" "}
                         <span class="date">{edu.data.date}</span>
                     </div>
                 </div>
