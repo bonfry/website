@@ -20,6 +20,7 @@ const formattedDate = talk.data.date.toLocaleDateString(undefined, {
     month: 'long',
     day: 'numeric',
 });
+
 ---
 
 <Layout title={talk.data.title} description={talk.data.desc} ogType="article">
@@ -37,6 +38,10 @@ const formattedDate = talk.data.date.toLocaleDateString(undefined, {
         </div>
 
         <PdfSlideshow pdfUrl={pdfUrl} client:only="react" />
+
+        
+
+        <Fragment set:html={talk.rendered?.html} />
     </div>
 </Layout>
 
