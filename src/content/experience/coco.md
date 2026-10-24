@@ -2,7 +2,7 @@
 title: FLUTTER DEVELOPER
 company: COCO Srl
 date: November 2020 – November 2022
-order: 2
+order: 3
 ---
 
 - Migrated applications from native development to cross-platform solutions based on Flutter.

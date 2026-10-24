@@ -1,8 +1,8 @@
 ---
 title: XR AND COMPUTER VISION ENGINEER
 company: Wideverse Srl
-date: October 2022 – Present
-order: 1
+date: October 2022 – May 2026
+order: 2
 ---
 
 - Developed XR applications (Unity and HoloLens 2) for remote support via 3D annotations and autonomous training of work procedures.
