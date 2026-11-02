@@ -20,9 +20,9 @@ const {
 const profileEntry = await getEntry("profile", "details");
 const profile = profileEntry!.data;
 
-const siteUrl = Astro.site ?? new URL("https://simonebonfrate.dev");
+const siteUrl = Astro.site ?? new URL("https://bonfry.com");
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
-const ogImageUrl = new URL(ogImage, siteUrl).href;
+const ogImageUrl = new URL(ogImage, import.meta.env.DEV ? Astro.url.origin : siteUrl).href;
 
 const fullName = `${profile.nameFirst} ${profile.nameLast}`;
 const pageTitle =

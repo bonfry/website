@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import '../../styles/talks-page.css';
+import '../../styles/pdf-slideshow.css';
+
+export async function getStaticPaths() {
+    const article = await getCollection('blog');
+    return article.map(a => ({
+        params: { id: a.id },
+        props: { article: a },
+    }));
+}
+
+const { article } = Astro.props;
+const formattedDate = article.data.publish_date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+});
+
+---
+
+<Layout 
+    title={article.data.title} 
+    description={article.data.subtitle} 
+    ogType="article"
+    ogImage={article.data.thumbnail}>
+    
+    <div class="talk-viewer">
+        <div class="talk-header">
+            <img src={article.data.thumbnail} />
+            <a href="/blog" class="back-link">
+                <span class="material-symbols-outlined">arrow_back</span>
+                All Articles
+            </a>
+            <div class="talk-meta">
+                <h1 class="talk-title">{article.data.title}</h1>
+                <p class="talk-date">{formattedDate}</p>
+                <p class="talk-desc">{article.data.subtitle}</p>
+            </div>
+        </div>
+
+        <Fragment set:html={article.rendered?.html} />
+    </div>
+</Layout>
+
+
+
