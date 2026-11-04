@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Privacy Policy" description="Privacy Policy for bonfry.com: personal data, cookies and your rights.">
+    <h1 class="section-title with-line">Privacy Policy</h1>
+    <p class="policy-intro">
+        Read the current Privacy Policy for bonfry.com below, or
+        <a href="https://www.iubenda.com/privacy-policy/74971648" target="_blank" rel="noopener noreferrer">open it directly on iubenda</a>.
+        See also the
+        <a href="https://www.iubenda.com/privacy-policy/74971648/cookie-policy" target="_blank" rel="noopener noreferrer">Cookie Policy</a>.
+    </p>
+    <iframe
+        src="https://www.iubenda.com/privacy-policy/74971648"
+        title="Privacy Policy for bonfry.com, hosted by iubenda"
+        referrerpolicy="no-referrer"
+        loading="lazy"
+        height="1000"
+    ></iframe>
+</Layout>
+
+<style>
+    .policy-intro {
+        margin-bottom: 24px;
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--text-muted);
+        max-width: 70ch;
+    }
+
+    a {
+        color: var(--text-main);
+        text-underline-offset: 3px;
+        overflow-wrap: anywhere;
+    }
+
+    a:focus-visible {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 3px;
+    }
+
+    iframe {
+        display: block;
+        width: 100%;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+    }
+</style>

@@ -12,6 +12,7 @@
     "build": "astro check && astro build",
     "test": "node --test",
     "preview": "astro preview",
+    "test": "node --test",
     "astro": "astro"
   },
   "dependencies": {
@@ -21,7 +22,8 @@
     "astro": "~7.4.5",
     "pdfjs-dist": "^3.11.174",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "vanilla-cookieconsent": "3.3.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
