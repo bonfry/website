@@ -1,0 +1,37 @@
+---
+import 'vanilla-cookieconsent/dist/cookieconsent.css';
+
+const measurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID?.trim();
+if (measurementId && !/^G-[A-Z0-9]+$/.test(measurementId)) {
+    throw new Error('PUBLIC_GA_MEASUREMENT_ID must be a GA4 Measurement ID (G-…), not an API secret.');
+}
+---
+
+{import.meta.env.PROD && measurementId && (
+    <button type="button" data-cc="show-preferencesModal" data-ga-measurement-id={measurementId}>
+        Cookie preferences
+    </button>
+)}
+
+<script>
+    import '../scripts/analytics';
+</script>
+
+<style>
+    button {
+        display: block;
+        margin: 12px auto 0;
+        padding: 10px 14px;
+        min-height: 44px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        background: var(--card-bg);
+        color: var(--text-main);
+        font: inherit;
+        cursor: pointer;
+    }
+
+    button:hover { border-color: var(--primary-color); }
+    button:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 3px; }
+    @media print { button { display: none; } }
+</style>

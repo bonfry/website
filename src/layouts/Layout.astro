@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { getEntry } from "astro:content";
+import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 
 interface Props {
     title: string;
@@ -204,6 +205,7 @@ const personSchema = {
         <footer class="site-footer">
             &copy; {new Date().getFullYear()}
             {fullName}. All rights reserved.
+            <GoogleAnalytics />
         </footer>
     </body>
 </html>
