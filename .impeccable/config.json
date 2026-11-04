@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-04T18:29:18.702Z",
+        "reason": "Agent: this is the Google Fonts import for the existing Inter typeface in HEAD, preserved during the scoped policy integration."
+      }
+    ]
+  }
+}

@@ -69,6 +69,22 @@ test('first or saved consent initializes once, with advertising denied before co
     assert.equal(commands[1][2].ad_storage, undefined);
     assert.equal(commands[3][2].allow_google_signals, false);
     assert.equal(commands[3][2].allow_ad_personalization_signals, false);
+    assert.equal(commands[3][2].cookie_expires, 63072000);
+});
+
+test('consent information links the site policies and matches cookie lifetimes', () => {
+    const { config } = setup();
+    const { consentModal, preferencesModal } = config.language.translations.en;
+    assert.match(consentModal.footer, /href="\/privacy"/);
+    assert.match(consentModal.footer, /74971648\/cookie-policy/);
+    const necessary = preferencesModal.sections.find((section) => section.linkedCategory === 'necessary');
+    assert.equal(necessary.cookieTable.body[0].duration, `${config.cookie.expiresAfterDays} days`);
+    const analytics = preferencesModal.sections.find((section) => section.linkedCategory === 'analytics');
+    assert.match(analytics.description, /Google Ireland Limited/);
+    assert.deepEqual(Array.from(analytics.cookieTable.body, (row) => [row.name, row.duration]), [
+        ['_ga', '2 years'], ['_ga_*', '2 years'],
+    ]);
+    assert.match(preferencesModal.sections.at(-1).description, /mailto:info@bonfry.com/);
 });
 
 test('revocation disables measurement and configures cookie cleanup and reload', () => {

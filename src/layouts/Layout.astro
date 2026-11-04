@@ -205,7 +205,34 @@ const personSchema = {
         <footer class="site-footer">
             &copy; {new Date().getFullYear()}
             {fullName}. All rights reserved.
+            <nav class="policy-links" aria-label="Legal information">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="https://www.iubenda.com/privacy-policy/74971648/cookie-policy" target="_blank" rel="noopener noreferrer">Cookie Policy</a>
+            </nav>
             <GoogleAnalytics />
         </footer>
     </body>
 </html>
+
+<style>
+    .policy-links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 4px 20px;
+        margin-top: 12px;
+    }
+
+    .policy-links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--text-main);
+        text-underline-offset: 3px;
+    }
+
+    .policy-links a:focus-visible {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 3px;
+    }
+</style>

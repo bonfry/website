@@ -37,6 +37,7 @@ if (measurementId) {
         window.gtag('consent', 'update', { analytics_storage: 'granted' });
         window.gtag('js', new Date());
         window.gtag('config', measurementId, {
+            cookie_expires: 60 * 60 * 24 * 365 * 2,
             allow_google_signals: false,
             allow_ad_personalization_signals: false,
         });
@@ -72,10 +73,11 @@ if (measurementId) {
                 en: {
                     consentModal: {
                         title: 'Cookie preferences',
-                        description: 'With your permission, Google Analytics helps measure visits and how this site is used. Google Analytics only loads after you accept. You can change your choice at any time in the footer.',
+                        description: 'We use a necessary cookie to remember your choice. With your permission, Google Analytics 4 measures visits and how this site is used. You can reject analytics and continue browsing, or change your choice at any time in the footer.',
                         acceptAllBtn: 'Accept analytics',
                         acceptNecessaryBtn: 'Reject analytics',
                         showPreferencesBtn: 'Manage preferences',
+                        footer: '<a href="/privacy">Privacy Policy</a><a href="https://www.iubenda.com/privacy-policy/74971648/cookie-policy" target="_blank" rel="noopener noreferrer">Cookie Policy</a>',
                     },
                     preferencesModal: {
                         title: 'Cookie preferences',
@@ -88,11 +90,28 @@ if (measurementId) {
                                 title: 'Necessary',
                                 description: 'The cc_cookie cookie saves your consent choice for 180 days. It is not used for analytics.',
                                 linkedCategory: 'necessary',
+                                cookieTable: {
+                                    caption: 'Necessary cookie',
+                                    headers: { name: 'Cookie', provider: 'Provider', duration: 'Duration' },
+                                    body: [{ name: 'cc_cookie', provider: 'bonfry.com', duration: '180 days' }],
+                                },
                             },
                             {
-                                title: 'Google Analytics 4',
-                                description: 'Optional analytics sends usage data to Google and uses _ga and _ga_* cookies to distinguish visits. Advertising consent stays denied. Withdrawing consent deletes these cookies and reloads the page to stop analytics. Read <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google’s privacy policy</a>.',
+                                title: 'Measurement — Google Analytics 4',
+                                description: 'Google Ireland Limited provides optional analytics to measure traffic and understand how bonfry.com is used. Data includes usage data, user counts, session statistics and cookie identifiers. Analytics only loads after you accept; advertising consent stays denied. Withdrawing consent deletes its cookies and reloads the page to stop analytics.',
                                 linkedCategory: 'analytics',
+                                cookieTable: {
+                                    caption: 'Google Analytics cookies',
+                                    headers: { name: 'Cookie', provider: 'Provider', duration: 'Duration' },
+                                    body: [
+                                        { name: '_ga', provider: 'Google Ireland Limited', duration: '2 years' },
+                                        { name: '_ga_*', provider: 'Google Ireland Limited', duration: '2 years' },
+                                    ],
+                                },
+                            },
+                            {
+                                title: 'Privacy and your rights',
+                                description: 'The data controller is Simone Bonfrate. For privacy questions or requests concerning your data, contact <a href="mailto:info@bonfry.com">info@bonfry.com</a>. Read the <a href="/privacy">Privacy Policy</a> for processing details and your rights, and the <a href="https://www.iubenda.com/privacy-policy/74971648/cookie-policy" target="_blank" rel="noopener noreferrer">Cookie Policy</a> for information about cookies and browser controls.',
                             },
                         ],
                     },
