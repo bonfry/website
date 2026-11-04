@@ -5,5 +5,6 @@ import react from '@astrojs/react';
 
 export default defineConfig({
     site: 'https://bonfry.com',
+    compressHTML: true,
     integrations: [sitemap(), react()],
 });

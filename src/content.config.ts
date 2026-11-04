@@ -70,6 +70,18 @@ const talksCollection = defineCollection({
   }),
 });
 
+const blogCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string(),
+    publish_date: z.date(),
+    tags: z.array(z.string()),
+    thumbnail: z.string()
+  }),
+});
+
+
 export const collections = {
   profile: profileCollection,
   about: aboutCollection,
@@ -77,5 +89,6 @@ export const collections = {
   education: educationCollection,
   skills: skillsCollection,
   talks: talksCollection,
-  volontary: volontaryCollection
+  volontary: volontaryCollection,
+  blog: blogCollection
 };
