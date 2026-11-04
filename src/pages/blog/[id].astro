@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import GiscusComments from '../../components/GiscusComments.astro';
 import { getCollection } from 'astro:content';
 import '../../styles/talks-page.css';
 import '../../styles/pdf-slideshow.css';
@@ -42,6 +43,7 @@ const formattedDate = article.data.publish_date.toLocaleDateString('en-US', {
         </div>
 
         <Fragment set:html={article.rendered?.html} />
+        <GiscusComments term={`blog/${article.id}`} />
     </div>
 </Layout>
 

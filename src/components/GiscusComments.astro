@@ -1,0 +1,65 @@
+---
+interface Props {
+    term: string;
+}
+
+const { term } = Astro.props;
+const repo = 'bonfry/website';
+const repoId = 'R_kgDOSZ_RRA';
+const categoryId = 'DIC_kwDOSZ_RRM4DKZQA';
+---
+
+<section class="comments" aria-labelledby="comments-heading">
+    <h2 id="comments-heading">Comments</h2>
+    <p>
+        Sign in with GitHub to leave a comment or reaction.
+        <a href={`https://github.com/${repo}/discussions`}>View discussions on GitHub</a>.
+    </p>
+    {categoryId && (
+        <div class="giscus" id="comments">
+            <script
+                is:inline
+                src="https://giscus.app/client.js"
+                data-repo={repo}
+                data-repo-id={repoId}
+                data-category="Comments"
+                data-category-id={categoryId}
+                data-mapping="specific"
+                data-term={term}
+                data-strict="1"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="light"
+                data-lang="en"
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async
+            ></script>
+        </div>
+    )}
+</section>
+
+<style>
+    .comments {
+        border-top: 1px solid var(--border-color);
+        padding-top: 2rem;
+        min-width: 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 0.75rem;
+    }
+
+    p {
+        color: var(--text-muted);
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    a {
+        color: var(--primary-color);
+    }
+</style>

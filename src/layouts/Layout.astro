@@ -64,6 +64,7 @@ const personSchema = {
         <meta name="author" content={fullName} />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={canonicalUrl} />
+        <meta name="giscus:backlink" content={canonicalUrl} />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content={ogType} />
@@ -101,14 +102,19 @@ const personSchema = {
                     >Home</a
                 >
                 <a
-                    href="/cv"
-                    class={`nav-link ${currentPath === "/cv" ? "active" : ""}`}
-                    >CV</a
-                >
-                <a
                     href="/talks"
                     class={`nav-link ${currentPath.startsWith("/talks") ? "active" : ""}`}
                     >Talks</a
+                >
+                <a
+                    href="/blog"
+                    class={`nav-link ${currentPath.startsWith("/blog") ? "active" : ""}`}
+                    >Blog</a
+                >
+                <a
+                    href="/cv"
+                    class={`nav-link ${currentPath === "/cv" ? "active" : ""}`}
+                    >CV</a
                 >
             </nav>
         </header>

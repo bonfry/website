@@ -10,6 +10,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
+    "test": "node --test",
     "preview": "astro preview",
     "test": "node --test",
     "astro": "astro"

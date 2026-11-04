@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import GiscusComments from '../../components/GiscusComments.astro';
 import { getCollection } from 'astro:content';
 import PdfSlideshow from '../../components/PdfSlideshow.jsx';
 import '../../styles/talks-page.css';
@@ -42,6 +43,7 @@ const formattedDate = talk.data.date.toLocaleDateString(undefined, {
         
 
         <Fragment set:html={talk.rendered?.html} />
+        <GiscusComments term={`talks/${talk.id}`} />
     </div>
 </Layout>
 
